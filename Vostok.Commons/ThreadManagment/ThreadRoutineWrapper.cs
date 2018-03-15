@@ -17,7 +17,7 @@ namespace Vostok.Commons.ThreadManagment
                 {
                     Thread.ResetAbort();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
             };
@@ -35,7 +35,7 @@ namespace Vostok.Commons.ThreadManagment
                 {
                     Thread.ResetAbort();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
             };
