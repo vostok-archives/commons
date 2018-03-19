@@ -24,22 +24,12 @@ namespace Vostok.Commons
 
         public static DataSize FromPetabytes(double petabytes) => 
             new DataSize((long)(petabytes * DataSizeConstants.Petabyte));
+
+        public static bool TryParse(string input, out DataSize result) => 
+            DataSizeParser.TryParse(input, out result);
+
         public static DataSize Parse(string input) => 
             DataSizeParser.Parse(input);
-
-        public static bool TryParse(string input, out DataSize result)
-        {
-            try
-            {
-                result = Parse(input);
-                return true;
-            }
-            catch
-            {
-                result = default(DataSize);
-                return false;
-            }
-        }
 
         public static DataSize DeserializeBinary(IBinaryDeserializer deserializer) => 
             new DataSize(deserializer.ReadInt64());
@@ -63,33 +53,19 @@ namespace Vostok.Commons
 
         public double TotalPetabytes => bytes / (double)DataSizeConstants.Petabyte;
 
-        public static explicit operator long(DataSize size)
+        public string ToString(bool shortFormat = true)
         {
-            return size.bytes;
+            if (Math.Abs(TotalPetabytes) >= 1)  return $"{TotalPetabytes:0.##} {(shortFormat ? "PB" : "petabytes")}";
+            if (Math.Abs(TotalTerabytes) >= 1)  return $"{TotalTerabytes:0.##} {(shortFormat ? "TB" : "terabytes")}";
+            if (Math.Abs(TotalGigabytes) >= 1)  return $"{TotalGigabytes:0.##} {(shortFormat ? "GB" : "gigabytes")}";
+            if (Math.Abs(TotalMegabytes) >= 1)  return $"{TotalMegabytes:0.##} {(shortFormat ? "MB" : "megabytes")}";
+            if (Math.Abs(TotalKilobytes) >= 1)  return $"{TotalKilobytes:0.##} {(shortFormat ? "KB" : "kilobytes")}";
+
+            return $"{bytes} {(shortFormat ? "B" : "bytes")}";
         }
 
-        public override string ToString() => ToString(true);
-
-        public string ToString(bool shortFormat)
-        {
-            if (Math.Abs(TotalPetabytes) >= 1)
-                return TotalPetabytes.ToString("0.##") + ' ' + (shortFormat ? "PB" : "petabytes");
-
-            if (Math.Abs(TotalTerabytes) >= 1)
-                return TotalTerabytes.ToString("0.##") + ' ' + (shortFormat ? "TB" : "terabytes");
-
-            if (Math.Abs(TotalGigabytes) >= 1)
-                return TotalGigabytes.ToString("0.##") + ' ' + (shortFormat ? "GB" : "gigabytes");
-
-            if (Math.Abs(TotalMegabytes) >= 1)
-                return TotalMegabytes.ToString("0.##") + ' ' + (shortFormat ? "MB" : "megabytes");
-
-            if (Math.Abs(TotalKilobytes) >= 1)
-                return TotalKilobytes.ToString("0.##") + ' ' + (shortFormat ? "KB" : "kilobytes");
-
-            return bytes.ToString() + ' ' + (shortFormat ? "B" : "bytes");
-        }
-
+        public static explicit operator long(DataSize size) => size.bytes;
+        
         public static DataSize operator +(DataSize size1, DataSize size2) => 
             new DataSize(size1.bytes + size2.bytes);
 
@@ -114,14 +90,14 @@ namespace Vostok.Commons
         public static DataSize operator *(double multiplier, DataSize size) => 
             size * multiplier;
 
-        public static DataSize operator /(DataSize size, int multiplier) => 
-            new DataSize(size.bytes / multiplier);
+        public static DataSize operator /(DataSize size, int divider) => 
+            new DataSize(size.bytes / divider);
 
-        public static DataSize operator /(DataSize size, long multiplier) => 
-            new DataSize(size.bytes / multiplier);
+        public static DataSize operator /(DataSize size, long divider) => 
+            new DataSize(size.bytes / divider);
 
-        public static DataSize operator /(DataSize size, double multiplier) => 
-            new DataSize((long)(size.bytes / multiplier));
+        public static DataSize operator /(DataSize size, double divider) => 
+            new DataSize((long)(size.bytes / divider));
 
         public static DataRate operator /(DataSize size, TimeSpan time) => 
             new DataRate((size / time.TotalSeconds).Bytes);

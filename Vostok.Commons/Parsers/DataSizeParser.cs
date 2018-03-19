@@ -11,21 +11,23 @@ namespace Vostok.Commons.Parsers
         {
             input = input.ToLower();
 
-            double Parse(string unit) => DoubleParser.Parse(PrepareInput(input, unit));
-            long ParseLong(string unit) => long.Parse(PrepareInput(input, unit));
+            bool TryParse(string unit, out double res) => DoubleParser.TryParse(PrepareInput(input, unit), out res);
+            bool TryParseLong(string unit, out long res) => long.TryParse(PrepareInput(input, unit), out res);
 
             bool TryGet(FromDouble method, string unit, out DataSize res)
             {
                 res = default(DataSize);
                 if (!input.Contains(unit)) return false;
-                res = method(Parse(unit));
+                if (!TryParse(unit, out var val)) return false;
+                res = method(val);
                 return true;
             }
             bool TryGetL(FromLong method, string unit, out DataSize res)
             {
                 res = default(DataSize);
                 if (!input.Contains(unit)) return false;
-                res = method(ParseLong(unit));
+                if (!TryParseLong(unit, out var val)) return false;
+                res = method(val);
                 return true;
             }
 

@@ -17,9 +17,7 @@ namespace Vostok.Commons.ThreadManagment
                 {
                     Thread.ResetAbort();
                 }
-                catch (Exception)
-                {
-                }
+                catch { /* ignored */ }
             };
         }
 
@@ -35,9 +33,7 @@ namespace Vostok.Commons.ThreadManagment
                 {
                     Thread.ResetAbort();
                 }
-                catch (Exception)
-                {
-                }
+                catch { /* ignored */ }
             };
         }
 
@@ -45,11 +41,11 @@ namespace Vostok.Commons.ThreadManagment
         {
             try
             {
-                return string.Format("method: {0}, declaringType: {1}", action.Method, action.Method.DeclaringType);
+                return $"method: {action.Method}, declaringType: {action.Method.DeclaringType}";
             }
-            catch (Exception)
+            catch
             {
-                return "";
+                return string.Empty;
             }
         }
 
@@ -57,11 +53,11 @@ namespace Vostok.Commons.ThreadManagment
         {
             try
             {
-                return string.Format("method: {0}, declaringType: {1}", action.Method, action.Method.DeclaringType);
+                return $"method: {action.Method}, declaringType: {action.Method.DeclaringType}";
             }
-            catch (Exception)
+            catch
             {
-                return "";
+                return string.Empty;
             }
         }
     }

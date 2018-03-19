@@ -13,12 +13,13 @@ namespace Vostok.Commons.Parsers
             if (TimeSpan.TryParse(input, out result))
                 return true;
             
-            double Parse(string unit) => DoubleParser.Parse(PrepareInput(input, unit));
+            bool TryParse(string unit, out double res) => DoubleParser.TryParse(PrepareInput(input, unit), out res);
 
             bool TryGet(FromValue method, string unit, out TimeSpan res)
             {
                 if (!input.Contains(unit)) return false;
-                res = method(Parse(unit));
+                if (!TryParse(unit, out var val)) return false;
+                res = method(val);
                 return true;
             }
 

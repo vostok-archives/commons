@@ -24,22 +24,11 @@ namespace Vostok.Commons
         public static DataRate FromPetabytesPerSecond(double petabytes) => 
             new DataRate((long)(petabytes * DataSizeConstants.Petabyte));
 
+        public static bool TryParse(string input, out DataRate result) => 
+            DataRateParser.TryParse(input, out result);
+
         public static DataRate Parse(string input) => 
             DataRateParser.Parse(input);
-
-        public static bool TryParse(string input, out DataRate result)
-        {
-            try
-            {
-                result = Parse(input);
-                return true;
-            }
-            catch
-            {
-                result = default(DataRate);
-                return false;
-            }
-        }
 
         private readonly long bytesPerSecond;
 
@@ -58,26 +47,15 @@ namespace Vostok.Commons
 
         public double PetabytesPerSecond => bytesPerSecond / (double)DataSizeConstants.Petabyte;
 
-        public override string ToString() => ToString(true);
-
-        public string ToString(bool shortFormat)
+        public string ToString(bool shortFormat = true)
         {
-            if (PetabytesPerSecond >= 1)
-                return PetabytesPerSecond.ToString("0.####") + ' ' + (shortFormat ? "PB/sec" : "petabytes/second");
+            if (PetabytesPerSecond >= 1)    return $"{PetabytesPerSecond:0.####} {(shortFormat ? "PB/sec" : "petabytes/second")}";
+            if (TerabytesPerSecond >= 1)    return $"{TerabytesPerSecond:0.####} {(shortFormat ? "TB/sec" : "terabytes/second")}";
+            if (GigabytesPerSecond >= 1)    return $"{GigabytesPerSecond:0.####} {(shortFormat ? "GB/sec" : "gigabytes/second")}";
+            if (MegabytesPerSecond >= 1)    return $"{MegabytesPerSecond:0.####} {(shortFormat ? "MB/sec" : "megabytes/second")}";
+            if (KilobytesPerSecond >= 1)    return $"{KilobytesPerSecond:0.####} {(shortFormat ? "KB/sec" : "kilobytes/second")}";
 
-            if (TerabytesPerSecond >= 1)
-                return TerabytesPerSecond.ToString("0.####") + ' ' + (shortFormat ? "TB/sec" : "terabytes/second");
-
-            if (GigabytesPerSecond >= 1)
-                return GigabytesPerSecond.ToString("0.####") + ' ' + (shortFormat ? "GB/sec" : "gigabytes/second");
-
-            if (MegabytesPerSecond >= 1)
-                return MegabytesPerSecond.ToString("0.####") + ' ' + (shortFormat ? "MB/sec" : "megabytes/second");
-
-            if (KilobytesPerSecond >= 1)
-                return KilobytesPerSecond.ToString("0.####") + ' ' + (shortFormat ? "KB/sec" : "kilobytes/second");
-
-            return bytesPerSecond.ToString() + ' ' + (shortFormat ? "B/sec" : "bytes/second");
+            return $"{bytesPerSecond} {(shortFormat ? "B/sec" : "bytes/second")}";
         }
 
         public static DataRate operator +(DataRate speed1, DataRate speed2) => 
@@ -92,23 +70,23 @@ namespace Vostok.Commons
         public static DataRate operator *(DataRate speed, long multiplier) => 
             new DataRate(speed.bytesPerSecond * multiplier);
 
-        public static DataRate operator *(DataRate speed, double multiplier) => 
+        public static DataRate operator *(DataRate speed, double multiplier) =>
             new DataRate((long)(speed.bytesPerSecond * multiplier));
 
-        public static DataRate operator /(DataRate speed, int multiplier) => 
-            new DataRate(speed.bytesPerSecond / multiplier);
-
-        public static DataRate operator /(DataRate speed, long multiplier) => 
-            new DataRate(speed.bytesPerSecond / multiplier);
-
-        public static DataRate operator /(DataRate speed, double multiplier) => 
-            new DataRate((long)(speed.bytesPerSecond / multiplier));
-
-        public static DataSize operator *(DataRate speed, TimeSpan time) => 
+        public static DataSize operator *(DataRate speed, TimeSpan time) =>
             new DataSize((long)(speed.bytesPerSecond * time.TotalSeconds));
 
-        public static DataSize operator *(TimeSpan time, DataRate speed) => 
+        public static DataSize operator *(TimeSpan time, DataRate speed) =>
             new DataSize((long)(speed.bytesPerSecond * time.TotalSeconds));
+
+        public static DataRate operator /(DataRate speed, int divider) => 
+            new DataRate(speed.bytesPerSecond / divider);
+
+        public static DataRate operator /(DataRate speed, long divider) => 
+            new DataRate(speed.bytesPerSecond / divider);
+
+        public static DataRate operator /(DataRate speed, double divider) => 
+            new DataRate((long)(speed.bytesPerSecond / divider));
 
         public bool Equals(DataRate other) => 
             bytesPerSecond == other.bytesPerSecond;
