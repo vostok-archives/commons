@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>0.0.5</PackageVersion>
+    <Authors>Vostok team</Authors>
+    <Company>SKB Kontur</Company>
+    <Product>Vostok</Product>
+    <Copyright>Copyright © SKB Kontur 2017-2018</Copyright>
+    <PackageProjectUrl>https://github.com/vostok/commons</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/vostok/commons/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Common library for microservice toolkit http://vostok.tools/</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
