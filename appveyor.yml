@@ -62,20 +62,21 @@ install:
   - ps: |
       $wc = New-Object System.Net.WebClient
       $wc.DownloadFile("https://raw.githubusercontent.com/vostok/cement-modules/master/settings", "$env:USERPROFILE\.cement\settings")
+  - set cm=%USERPROFILE%\bin\cm.cmd
   - cd %appveyor_build_folder%\..
   - ps: | 
-      & cm init
+      & $env:cm init
       cd $env:appveyor_build_folder
-      & cm update-deps
+      & $env:cm update-deps
   - ps: |
-      & cm build-deps
+      & $env:cm build-deps
   - dotnet restore
 configuration: Release
 after_build:
   - ps: |
       if ($env:appveyor_repo_branch -eq "master" -and "$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH" -eq "") {
         $proj="Vostok.$env:APPVEYOR_PROJECT_NAME.csproj"
-        & cm pack $proj
+        & $env:cm pack $proj
         if (!$?) {
             Write-Output "cm pack error"
             exit 1
