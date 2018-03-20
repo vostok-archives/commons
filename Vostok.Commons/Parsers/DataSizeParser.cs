@@ -58,7 +58,7 @@ namespace Vostok.Commons.Parsers
         {
             if (TryParse(input, out var res))
                 return res;
-            throw new FormatException($"{nameof(DataSizeParser)}. Failed to parse DataSize from string '{input}'.");
+            throw new FormatException($"{nameof(DataSizeParser)}. Failed to parse from string '{input}'.");
         }
 
         private static string PrepareInput(string input, string unit) => 

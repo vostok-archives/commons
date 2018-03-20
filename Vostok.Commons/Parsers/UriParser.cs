@@ -13,7 +13,7 @@ namespace Vostok.Commons.Parsers
         {
             if (TryParse(input, out var res))
                 return res;
-            throw new FormatException($"{nameof(UriParser)}. Failed to parse TimeSpan from string '{input}'.");
+            throw new FormatException($"{nameof(UriParser)}. Failed to parse from string '{input}'.");
         }
     }
 }

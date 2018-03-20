@@ -48,7 +48,7 @@ namespace Vostok.Commons.Parsers
         {
             if (TryParse(input, out var res))
                 return res;
-            throw new FormatException($"{nameof(TimeSpanParser)}. Failed to parse TimeSpan from string '{input}'.");
+            throw new FormatException($"{nameof(TimeSpanParser)}. Failed to parse from string '{input}'.");
         }
 
         private static string PrepareInput(string input, string unit) => 
