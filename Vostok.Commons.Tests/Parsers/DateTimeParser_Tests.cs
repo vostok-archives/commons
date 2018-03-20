@@ -11,7 +11,7 @@ namespace Vostok.Commons.Tests.Parsers
     {
         [TestCase("2018-03-14 15:09:26.535", true, 2018, 3, 14, 15, 9, 26, 535, 0)]
         [TestCase("2018-03-14T15:09:26.535", true, 2018, 3, 14, 15, 9, 26, 535, 0)]
-        [TestCase("20050809T181142+0330", true, 2005, 8, 9, 18 + 1, 11 + 30, 42, 0, 3*60+30)]
+        [TestCase("20050809T181142+0330", true, 2005, 8, 9, 18, 11, 42, 0, 3*60+30)]
         [TestCase("20050809T181142", true, 2005, 8, 9, 18, 11, 42, 0, 0)]
         [TestCase("20050809", true, 2005, 8, 9, 0, 0, 0, 0, 0)]
         [TestCase("2005/08/09", true, 2005, 8, 9, 0, 0, 0, 0, 0)]
@@ -29,10 +29,17 @@ namespace Vostok.Commons.Tests.Parsers
                 d = DateTime.Now.Day;
             }
 
+            DateTimeOffset expectedDatetime;
             if (Math.Abs(minutesOffset) < 1e-5)
+            {
                 minutesOffset = DateTimeOffset.Now.Offset.TotalMinutes;
+                expectedDatetime = new DateTimeOffset(y, m, d, h, min, s, ms, TimeSpan.FromMinutes(minutesOffset));
+            }
+            else
+            {
+                expectedDatetime = new DateTimeOffset(y, m, d, h, min, s, ms, TimeSpan.FromMinutes(minutesOffset)).ToLocalTime();
+            }
 
-            var expectedDatetime = new DateTimeOffset(y, m, d, h, min, s, ms, TimeSpan.FromMinutes(minutesOffset));
             DateTimeParser.TryParse(input, out var res).Should()
                 .Be(boolRes && res == expectedDatetime.DateTime, $"parse result={boolRes}, parsed={res}, expected={expectedDatetime}, diff={res - expectedDatetime.DateTime}");
         }
