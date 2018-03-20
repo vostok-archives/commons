@@ -4,7 +4,10 @@ nuget:
   project_feed: true
   disable_publish_on_pr: true
 install:
-  - ps: Start-FileDownload "https://raw.githubusercontent.com/vostok/appveyor/master/install.ps1"
+  - ps: |
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+      Invoke-WebRequest "https://raw.githubusercontent.com/vostok/appveyor/master/install.ps1" -OutFile "$env:appveyor_build_folder/install.ps1"
+  - install.ps1
 configuration: Release
 after_build:
   - ps: |
