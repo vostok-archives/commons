@@ -7,6 +7,7 @@ using Vostok.Commons.Time;
 
 namespace Vostok.Commons.Testing
 {
+    // TODO(krait): Move into a separate build configuration.
     public static class AssertionAssertions
     {
         public static void ShouldPassIn(this Action assertion, TimeSpan wait)

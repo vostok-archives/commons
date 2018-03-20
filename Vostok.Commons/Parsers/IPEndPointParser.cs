@@ -19,8 +19,7 @@ namespace Vostok.Commons.Parsers
                     result = new IPEndPoint(ipRes, 0);
                     return true;
                 }
-                else
-                    return false;
+                return false;
             }
 
             var ip = input.Substring(0, sepPos).Trim('[', ']');
