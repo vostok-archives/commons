@@ -96,11 +96,11 @@ notifications:
     on_build_failure: true
     on_build_status_changed: true
 deploy:
-  provider: NuGet
-  on:
-    appveyor_repo_tag: true
-  api_key:
-    secure: JxB6wnv1G5qa2PG2XjtXYjdhktbBS8dYZVfJ/oXwdlLOYnPz7pngyoe0Tphp+UyT
-  skip_symbols: false
-  symbol_server:           # remove to push symbols to SymbolSource.org
-  artifact: /.*\.nupkg/
+  - provider: Environment
+    name: Nuget
+    on:
+      appveyor_repo_tag: true
+    artifact: /.*\.nupkg/
+  - provider: Environment
+    name: FullNuget
+    artifact: /.*\.nupkg/
