@@ -1,28 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>0.0.5</PackageVersion>
+    <Version>0.0.1</Version>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
-    <Copyright>Copyright © SKB Kontur 2017-2018</Copyright>
+    <Copyright>Copyright (c) 2017-2018 SKB Kontur</Copyright>
     <PackageProjectUrl>https://github.com/vostok/commons</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/vostok/commons/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Common library for microservice toolkit http://vostok.tools/</Description>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="NUnit" Version="3.10.1" />
   </ItemGroup>
-
 </Project>
