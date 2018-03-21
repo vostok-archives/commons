@@ -9,11 +9,6 @@
     <PackageProjectUrl>https://github.com/vostok/commons</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/vostok/commons/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Common library for microservice toolkit http://vostok.tools/</Description>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
