@@ -1,5 +1,5 @@
 ﻿using System;
-using Vostok.Commons.Convertions;
+using Vostok.Commons.Conversions;
 
 namespace Vostok.Commons.Parsers
 {

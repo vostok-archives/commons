@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using NUnit.Framework;
-using Vostok.Commons.Convertions;
+using Vostok.Commons.Conversions;
 
 namespace Vostok.Commons.Tests.Convertions
 {

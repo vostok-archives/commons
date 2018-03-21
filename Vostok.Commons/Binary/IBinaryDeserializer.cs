@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Vostok.Commons.Binary
 {
+    // TODO(krait): Replace with implementations from old Vostok.Core: https://github.com/vostok/core/tree/master/Vostok.Core/Commons/Binary
     public interface IBinaryDeserializer
     {
         int Position { get; set; }

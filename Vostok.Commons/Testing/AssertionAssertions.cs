@@ -2,7 +2,7 @@
 using System.Threading;
 using NSubstitute.Exceptions;
 using NUnit.Framework;
-using Vostok.Commons.Convertions;
+using Vostok.Commons.Conversions;
 using Vostok.Commons.Time;
 
 namespace Vostok.Commons.Testing
