@@ -17,9 +17,9 @@ namespace Vostok.Commons.Tests.ThreadManagment
         [Test]
         public void Run_should_run_thread()
         {
-            new Action(Run_should_run_thread_test).ShouldPassIn(400.Milliseconds());
+            new Action(RunShouldRunThreadTest).ShouldPassIn(400.Milliseconds());
         }
-        public void Run_should_run_thread_test()
+        private void RunShouldRunThreadTest()
         {
             var thread = ThreadRunner.Run(() =>
             {
@@ -34,9 +34,9 @@ namespace Vostok.Commons.Tests.ThreadManagment
         [Test]
         public void Run_should_run_thread_with_parameters()
         {
-            new Action(Run_should_run_thread_with_parameters_test).ShouldPassIn(400.Milliseconds());
+            new Action(RunShouldRunThreadWithParametersTest).ShouldPassIn(400.Milliseconds());
         }
-        public void Run_should_run_thread_with_parameters_test()
+        private void RunShouldRunThreadWithParametersTest()
         {
             var thread = ThreadRunner.Run(obj =>
             {

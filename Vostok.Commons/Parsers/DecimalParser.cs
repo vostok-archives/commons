@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Vostok.Commons.Parsers
 {
@@ -7,7 +8,7 @@ namespace Vostok.Commons.Parsers
         public static bool TryParse(string input, out decimal res)
         {
             input = StringMethods.PrepareForFloatNumbers(input);
-            return decimal.TryParse(input, out res);
+            return decimal.TryParse(input, NumberStyles.Number, CultureInfo.CurrentCulture, out res);
         }
         public static decimal Parse(string input)
         {

@@ -3,7 +3,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Vostok.Commons.Conversions;
 
-namespace Vostok.Commons.Tests.Convertions
+namespace Vostok.Commons.Tests.Conversions
 {
     [TestFixture]
     public class TimeConversionExtensions_Tests

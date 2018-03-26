@@ -5,7 +5,7 @@ using Vostok.Commons.Parsers;
 namespace Vostok.Commons
 {
     [Serializable]
-    public struct DataSize : IEquatable<DataSize>, IComparable<DataSize>, IBinarySerializable
+    public struct DataSize : IEquatable<DataSize>, IComparable<DataSize>, IBinaryWritable
     {
         public static DataSize FromBytes(long bytes) => 
             new DataSize(bytes);
@@ -31,7 +31,7 @@ namespace Vostok.Commons
         public static DataSize Parse(string input) => 
             DataSizeParser.Parse(input);
 
-        public static DataSize DeserializeBinary(IBinaryDeserializer deserializer) => 
+        public static DataSize DeserializeBinary(IBinaryReader deserializer) => 
             new DataSize(deserializer.ReadInt64());
 
         private readonly long bytes;
@@ -142,7 +142,7 @@ namespace Vostok.Commons
         public static bool operator <=(DataSize size1, DataSize size2) => 
             size1.bytes <= size2.bytes;
 
-        public void SerializeBinary(IBinarySerializer serializer) => 
+        public void SerializeBinary(IBinaryWriter serializer) => 
             serializer.Write(bytes);
     }
 }

@@ -8,15 +8,13 @@ namespace Vostok.Commons.Tests.Parsers
     [TestFixture]
     public class DecimalParser_Tests
     {
-//        [TestCase("1.23", true, 1.23)]
-//        [TestCase("1,23", true, 1.23)]
-//        [TestCase("abc", false, 0)]
         [Test]
-        public void Should_TryParse(/*string input, bool boolRes, decimal res*/)
+        public void Should_TryParse()
         {
             decimal res;
             DecimalParser.TryParse("1.23", out res).Should().BeTrue().And.Be(res == 1.23m);
             DecimalParser.TryParse("1,23", out res).Should().BeTrue().And.Be(res == 1.23m);
+            DecimalParser.TryParse(" -1 000'23 ", out res).Should().BeTrue().And.Be(res == -1000.23m);
             DecimalParser.TryParse("abc", out _).Should().BeFalse();
         }
 
