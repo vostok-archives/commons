@@ -6,22 +6,25 @@ namespace Vostok.Commons.Binary
 {
     public static class BinaryWriterExtensions
     {
-        public static void Write(this IBinaryWriter writer, string value)
+        public static IBinaryWriter Write(this IBinaryWriter writer, string value)
         {
             writer.Write(value, Encoding.UTF8);
+            return writer;
         }
 
-        public static void WriteWithoutLengthPrefix(this IBinaryWriter writer, string value)
+        public static IBinaryWriter WriteWithoutLengthPrefix(this IBinaryWriter writer, string value)
         {
             writer.WriteWithoutLengthPrefix(value, Encoding.UTF8);
+            return writer;
         }
 
-        public static void Write(this IBinaryWriter writer, TimeSpan value)
+        public static IBinaryWriter Write(this IBinaryWriter writer, TimeSpan value)
         {
             writer.Write(value.Ticks);
+            return writer;
         }
 
-        public static void WriteCollection<T>(
+        public static IBinaryWriter WriteCollection<T>(
             this IBinaryWriter writer,
             IReadOnlyCollection<T> values,
             Action<IBinaryWriter, T> writeSingleValue)
@@ -37,9 +40,11 @@ namespace Vostok.Commons.Binary
             {
                 writeSingleValue(writer, value);
             }
+
+            return writer;
         }
 
-        public static void WriteDictionary<TKey, TValue>(
+        public static IBinaryWriter WriteDictionary<TKey, TValue>(
             this IBinaryWriter writer,
             IReadOnlyDictionary<TKey, TValue> values,
             Action<IBinaryWriter, TKey> writeSingleKey,
@@ -57,9 +62,11 @@ namespace Vostok.Commons.Binary
                 writeSingleKey(writer, pair.Key);
                 writeSingleValue(writer, pair.Value);
             }
+
+            return writer;
         }
 
-        public static void WriteDictionary<TKey, TValue>(
+        public static IBinaryWriter WriteDictionary<TKey, TValue>(
             this IBinaryWriter writer,
             IDictionary<TKey, TValue> values,
             Action<IBinaryWriter, TKey> writeSingleKey,
@@ -77,24 +84,30 @@ namespace Vostok.Commons.Binary
                 writeSingleKey(writer, pair.Key);
                 writeSingleValue(writer, pair.Value);
             }
+
+            return writer;
         }
 
-        public static void WriteNullable<T>(this IBinaryWriter writer, T value, Action<IBinaryWriter, T> writeNonNullValue)
+        public static IBinaryWriter WriteNullable<T>(this IBinaryWriter writer, T value, Action<IBinaryWriter, T> writeNonNullValue)
             where T : class
         {
             writer.Write(value != null);
 
             if (value != null)
                 writeNonNullValue(writer, value);
+
+            return writer;
         }
 
-        public static void WriteNullable<T>(this IBinaryWriter writer, T? value, Action<IBinaryWriter, T> writeNonNullValue)
+        public static IBinaryWriter WriteNullable<T>(this IBinaryWriter writer, T? value, Action<IBinaryWriter, T> writeNonNullValue)
             where T : struct
         {
             writer.Write(value != null);
 
             if (value != null)
                 writeNonNullValue(writer, value.Value);
+
+            return writer;
         }
     }
 }
