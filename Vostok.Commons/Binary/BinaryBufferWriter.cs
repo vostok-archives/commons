@@ -57,6 +57,8 @@ namespace Vostok.Commons.Binary
             if (remainingBytes >= neededBytes)
                 return;
 
+            //todo(Mansiper): grows (and works) too slow. Size * 2 is better way.
+            //var newCapacity = buffer.Length == 0 ? 2 : buffer.Length * 2;
             var newCapacity = buffer.Length + Math.Max(neededBytes - remainingBytes, buffer.Length);
             var newBuffer = new byte[newCapacity];
 
@@ -80,7 +82,7 @@ namespace Vostok.Commons.Binary
             Seek(length);
         }
 
-        public unsafe void Write(int value)
+        public unsafe IBinaryWriter Write(int value)
         {
             EnsureCapacity(sizeof(int));
 
@@ -91,9 +93,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(long value)
+        public unsafe IBinaryWriter Write(long value)
         {
             EnsureCapacity(sizeof(long));
 
@@ -103,9 +107,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(short value)
+        public unsafe IBinaryWriter Write(short value)
         {
             EnsureCapacity(sizeof(short));
 
@@ -115,9 +121,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(uint value)
+        public unsafe IBinaryWriter Write(uint value)
         {
             EnsureCapacity(sizeof(uint));
 
@@ -127,9 +135,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(ulong value)
+        public unsafe IBinaryWriter Write(ulong value)
         {
             EnsureCapacity(sizeof(ulong));
 
@@ -139,9 +149,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(ushort value)
+        public unsafe IBinaryWriter Write(ushort value)
         {
             EnsureCapacity(sizeof(ushort));
 
@@ -151,9 +163,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public void Write(byte value)
+        public IBinaryWriter Write(byte value)
         {
             EnsureCapacity(1);
 
@@ -161,14 +175,17 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public void Write(bool value)
+        public IBinaryWriter Write(bool value)
         {
             Write(value ? (byte) 1 : (byte) 0);
+            return this;
         }
 
-        public unsafe void Write(float value)
+        public unsafe IBinaryWriter Write(float value)
         {
             EnsureCapacity(sizeof(float));
 
@@ -178,9 +195,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(double value)
+        public unsafe IBinaryWriter Write(double value)
         {
             EnsureCapacity(sizeof(double));
 
@@ -190,9 +209,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public unsafe void Write(Guid value)
+        public unsafe IBinaryWriter Write(Guid value)
         {
             EnsureCapacity(sizeof(Guid));
 
@@ -202,9 +223,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public void Write(string value, Encoding encoding)
+        public IBinaryWriter Write(string value, Encoding encoding)
         {
             EnsureCapacity(encoding.GetMaxByteCount(value.Length) + sizeof(int));
 
@@ -214,9 +237,11 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public void WriteWithoutLengthPrefix(string value, Encoding encoding)
+        public IBinaryWriter WriteWithoutLengthPrefix(string value, Encoding encoding)
         {
             EnsureCapacity(encoding.GetMaxByteCount(value.Length));
 
@@ -224,14 +249,17 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public void Write(byte[] value)
+        public IBinaryWriter Write(byte[] value)
         {
             Write(value, 0, value.Length);
+            return this;
         }
 
-        public void Write(byte[] value, int off, int len)
+        public IBinaryWriter Write(byte[] value, int off, int len)
         {
             EnsureCapacity(len + sizeof(int));
 
@@ -241,14 +269,17 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
 
-        public void WriteWithoutLengthPrefix(byte[] value)
+        public IBinaryWriter WriteWithoutLengthPrefix(byte[] value)
         {
             WriteWithoutLengthPrefix(value, 0, value.Length);
+            return this;
         }
 
-        public void WriteWithoutLengthPrefix(byte[] value, int off, int len)
+        public IBinaryWriter WriteWithoutLengthPrefix(byte[] value, int off, int len)
         {
             EnsureCapacity(len);
 
@@ -257,6 +288,8 @@ namespace Vostok.Commons.Binary
 
             if (offset > length)
                 length = offset;
+
+            return this;
         }
     }
 }

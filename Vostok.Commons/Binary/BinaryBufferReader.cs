@@ -5,7 +5,7 @@ namespace Vostok.Commons.Binary
 {
     public class BinaryBufferReader : IBinaryReader
     {
-        public BinaryBufferReader(byte[] buffer, int position)
+        public BinaryBufferReader(byte[] buffer, int position = 0)
         {
             Buffer = buffer;
             Position = position;
