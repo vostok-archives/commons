@@ -5,7 +5,7 @@ namespace Vostok.Commons.Binary
 {
     public interface IBinaryReader
     {
-        int Position { get; set; }
+        long Position { get; set; }
 
         int ReadInt32();
         long ReadInt64();

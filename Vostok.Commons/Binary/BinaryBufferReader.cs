@@ -15,6 +15,12 @@ namespace Vostok.Commons.Binary
 
         public int Position { get; set; }
 
+        long IBinaryReader.Position
+        {
+            get => Position;
+            set => Position = (int)value;
+        }
+
         public int BytesRemaining => Buffer.Length - Position;
 
         public unsafe int ReadInt32()
