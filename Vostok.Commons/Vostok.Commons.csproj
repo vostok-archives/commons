@@ -1,7 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1</Version>
+    <Configurations>Debug;Release</Configurations>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.0</Version>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
@@ -11,9 +15,23 @@
     <Description>Common library for microservice toolkit http://vostok.tools/</Description>
     <LangVersion>7.2</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NuspecFile>Vostok.Commons.nuspec</NuspecFile>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="ILRepack.MSBuild.Task" Version="1.0.9" />
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="NUnit" Version="3.10.1" />
   </ItemGroup>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <InputAssemblies Include="$(USERPROFILE)\.nuget\packages\NUnit\3.10.1\lib\netstandard2.0\nunit.framework.dll" />
+      <InputAssemblies Include="$(USERPROFILE)\.nuget\packages\NSubstitute\3.1.0\lib\netstandard1.3\NSubstitute.dll" />
+      <InputAssemblies Include="$(OutputPath)\Vostok.Commons.dll" />
+    </ItemGroup>
+    <ItemGroup>
+      <DoNotInternalizeAssemblies Include="Vostok.Commons" />
+    </ItemGroup>
+    <ILRepack Parallel="true" Internalize="true" InternalizeExclude="@(DoNotInternalizeAssemblies)" InputAssemblies="@(InputAssemblies)" TargetKind="Dll" OutputFile="$(OutputPath)\Merged\$(AssemblyName).dll" />
+  </Target>
 </Project>
