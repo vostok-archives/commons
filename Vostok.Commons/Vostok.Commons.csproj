@@ -1,7 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.0.1</Version>
+    <Configurations>Debug;Release</Configurations>
+    <LangVersion>7.2</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NuspecFile>Vostok.Commons.nuspec</NuspecFile>
+    <Version>0.0.0</Version>
     <Authors>Vostok team</Authors>
     <Company>SKB Kontur</Company>
     <Product>Vostok</Product>
@@ -9,7 +15,6 @@
     <PackageProjectUrl>https://github.com/vostok/commons</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/vostok/commons/blob/master/LICENSE</PackageLicenseUrl>
     <Description>Common library for microservice toolkit http://vostok.tools/</Description>
-    <LangVersion>7.2</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
