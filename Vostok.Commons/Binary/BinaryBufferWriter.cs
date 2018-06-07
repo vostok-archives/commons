@@ -36,6 +36,12 @@ namespace Vostok.Commons.Binary
             }
         }
 
+        long IBinaryWriter.Position
+        {
+            get => Position;
+            set => Position = (int)value;
+        }
+
         public byte[] Buffer => buffer;
 
         public int Length => length;
@@ -57,8 +63,6 @@ namespace Vostok.Commons.Binary
             if (remainingBytes >= neededBytes)
                 return;
 
-            //todo(Mansiper): grows (and works) too slow. Size * 2 is better way.
-            //var newCapacity = buffer.Length == 0 ? 2 : buffer.Length * 2;
             var newCapacity = buffer.Length + Math.Max(neededBytes - remainingBytes, buffer.Length);
             var newBuffer = new byte[newCapacity];
 

@@ -5,7 +5,7 @@ namespace Vostok.Commons.Binary
 {
     public interface IBinaryWriter
     {
-        int Position { get; set; }
+        long Position { get; set; }
 
         IBinaryWriter Write(int value);
         IBinaryWriter Write(long value);
