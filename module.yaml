@@ -1,7 +1,7 @@
-default:
+sdk *default:
   build:
     target: Vostok.Commons.sln
-    configuration: Release
+    configuration: NoTests
     tool:
       name: dotnet
 
@@ -10,10 +10,7 @@ default:
 
   deps:
 
-notests *default:
+full-build > sdk:
   build:
-    configuration: NoTests
-
-full-build:
-  build:
+    target: Vostok.Commons.sln
     configuration: Release
