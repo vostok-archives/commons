@@ -2,10 +2,25 @@
 
 namespace Vostok.Commons.Parsers
 {
-    public class DataSizeParser
+    public static class DataSizeParser
     {
-        private delegate DataSize FromDouble(double value);
-        private delegate DataSize FromLong(long value);
+        private const string Bytes1 = "b";
+        private const string Bytes2 = "bytes";
+
+        private const string Kilobytes1 = "kb";
+        private const string Kilobytes2 = "kilobytes";
+
+        private const string Megabytes1 = "mb";
+        private const string Megabytes2 = "megabytes";
+
+        private const string Gigabytes1 = "gb";
+        private const string Gigabytes2 = "gigabytes";
+
+        private const string Terabytes1 = "tb";
+        private const string Terabytes2 = "terabytes";
+
+        private const string Petabytes1 = "pb";
+        private const string Petabytes2 = "petabytes";
 
         public static bool TryParse(string input, out DataSize result)
         {
@@ -16,12 +31,13 @@ namespace Vostok.Commons.Parsers
 
             bool TryGet(FromDouble method, string unit, out DataSize res)
             {
-                res = default(DataSize);
+                res = default;
                 if (!input.Contains(unit)) return false;
                 if (!TryParse(unit, out var val)) return false;
                 res = method(val);
                 return true;
             }
+
             bool TryGetL(FromLong method, string unit, out DataSize res)
             {
                 res = default(DataSize);
@@ -61,25 +77,11 @@ namespace Vostok.Commons.Parsers
             throw new FormatException($"{nameof(DataSizeParser)}. Failed to parse from string '{input}'.");
         }
 
-        private static string PrepareInput(string input, string unit) => 
+        private delegate DataSize FromDouble(double value);
+
+        private delegate DataSize FromLong(long value);
+
+        private static string PrepareInput(string input, string unit) =>
             input.Replace(unit, string.Empty).Trim('.').Trim();
-
-        private const string Bytes1 = "b";
-        private const string Bytes2 = "bytes";
-
-        private const string Kilobytes1 = "kb";
-        private const string Kilobytes2 = "kilobytes";
-
-        private const string Megabytes1 = "mb";
-        private const string Megabytes2 = "megabytes";
-
-        private const string Gigabytes1 = "gb";
-        private const string Gigabytes2 = "gigabytes";
-
-        private const string Terabytes1 = "tb";
-        private const string Terabytes2 = "terabytes";
-
-        private const string Petabytes1 = "pb";
-        private const string Petabytes2 = "petabytes";
     }
 }

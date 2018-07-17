@@ -2,12 +2,10 @@
 
 namespace Vostok.Commons.Parsers
 {
-    public class UriParser
+    public static class UriParser
     {
-        public static bool TryParse(string input, out Uri result)
-        {
-            return Uri.TryCreate(input, UriKind.RelativeOrAbsolute, out result);
-        }
+        public static bool TryParse(string input, out Uri result) =>
+            Uri.TryCreate(input, UriKind.RelativeOrAbsolute, out result);
 
         public static Uri Parse(string input)
         {

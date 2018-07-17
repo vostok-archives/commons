@@ -2,7 +2,7 @@
 
 namespace Vostok.Commons.Parsers
 {
-    public class DateTimeParser
+    public static class DateTimeParser
     {
         public static bool TryParse(string input, out DateTime result)
         {
@@ -10,6 +10,7 @@ namespace Vostok.Commons.Parsers
             result = res ? dt.UtcDateTime : default;
             return res;
         }
+
         public static DateTime Parse(string input)
         {
             if (TryParse(input, out var res))

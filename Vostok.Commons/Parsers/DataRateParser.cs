@@ -3,7 +3,7 @@ using Vostok.Commons.Conversions;
 
 namespace Vostok.Commons.Parsers
 {
-    public class DataRateParser
+    public static class DataRateParser
     {
         private const string Second1 = "/s";
         private const string Second2 = "/sec";
@@ -21,11 +21,11 @@ namespace Vostok.Commons.Parsers
 
             if (DataSizeParser.TryParse(input, out var res))
             {
-                result = res / 1.Seconds();
+                result = res/1.Seconds();
                 return true;
             }
 
-            result = default(DataRate);
+            result = default;
             return false;
         }
 

@@ -8,16 +8,16 @@ namespace Vostok.Commons.Time
         public static readonly TimeBudget Infinite = new TimeBudget(TimeSpan.FromHours(1));
         public static readonly TimeBudget Expired = new TimeBudget(TimeSpan.Zero);
 
-        public static TimeBudget StartNew(TimeSpan budget, TimeSpan precision) => 
+        public static TimeBudget StartNew(TimeSpan budget, TimeSpan precision) =>
             new TimeBudget(budget, precision).Start();
 
-        public static TimeBudget StartNew(TimeSpan budget) => 
+        public static TimeBudget StartNew(TimeSpan budget) =>
             new TimeBudget(budget).Start();
 
-        public static TimeBudget StartNew(int budgetMs, int precisionMs) => 
+        public static TimeBudget StartNew(int budgetMs, int precisionMs) =>
             new TimeBudget(TimeSpan.FromMilliseconds(budgetMs), TimeSpan.FromMilliseconds(precisionMs)).Start();
 
-        public static TimeBudget StartNew(int budgetMs) => 
+        public static TimeBudget StartNew(int budgetMs) =>
             new TimeBudget(TimeSpan.FromMilliseconds(budgetMs)).Start();
 
         private readonly TimeSpan budget;
@@ -56,7 +56,7 @@ namespace Vostok.Commons.Time
 
         public TimeSpan Elapsed() => watch.Elapsed;
 
-        public TimeSpan TryAcquireTime(TimeSpan neededTime) => 
+        public TimeSpan TryAcquireTime(TimeSpan neededTime) =>
             TimeSpanExtensions.Min(neededTime, Remaining());
 
         public bool HasExpired() => Remaining() <= TimeSpan.Zero;

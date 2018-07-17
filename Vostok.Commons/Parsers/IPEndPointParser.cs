@@ -3,7 +3,7 @@ using System.Net;
 
 namespace Vostok.Commons.Parsers
 {
-    public class IPEndPointParser
+    public static class IPEndPointParser
     {
         public static bool TryParse(string input, out IPEndPoint result)
         {
@@ -19,6 +19,7 @@ namespace Vostok.Commons.Parsers
                     result = new IPEndPoint(ipRes, 0);
                     return true;
                 }
+
                 return false;
             }
 

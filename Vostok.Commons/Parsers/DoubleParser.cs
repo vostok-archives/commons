@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Vostok.Commons.Parsers
 {
-    public class DoubleParser
+    public static class DoubleParser
     {
         public static bool TryParse(string input, out double res)
         {

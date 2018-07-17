@@ -2,7 +2,7 @@
 
 namespace Vostok.Commons.Parsers
 {
-    public class StringMethods
+    public static class StringMethods
     {
         public static string PrepareForFloatNumbers(string input)
         {
@@ -10,7 +10,7 @@ namespace Vostok.Commons.Parsers
             return input.Replace(',', sep).Replace('.', sep).Replace('\'', sep).Replace(" ", "");
         }
 
-        public static string PrepareForTimeSpan(string input) => 
+        public static string PrepareForTimeSpan(string input) =>
             input.ToLower().Replace(',', '.');
     }
 }
