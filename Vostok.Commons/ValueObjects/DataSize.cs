@@ -2,7 +2,7 @@
 using Vostok.Commons.Binary;
 using Vostok.Commons.Parsers;
 
-namespace Vostok.Commons
+namespace Vostok.Commons.ValueObjects
 {
     [Serializable]
     public struct DataSize : IEquatable<DataSize>, IComparable<DataSize>, IBinaryWritable

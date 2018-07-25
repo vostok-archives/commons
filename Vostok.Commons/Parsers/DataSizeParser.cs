@@ -1,4 +1,5 @@
 ﻿using System;
+using Vostok.Commons.ValueObjects;
 
 namespace Vostok.Commons.Parsers
 {

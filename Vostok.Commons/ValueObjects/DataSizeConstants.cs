@@ -1,4 +1,4 @@
-﻿namespace Vostok.Commons
+﻿namespace Vostok.Commons.ValueObjects
 {
     public static class DataSizeConstants
     {

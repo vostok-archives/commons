@@ -1,8 +1,9 @@
 ﻿using System;
 using FluentAssertions;
 using NUnit.Framework;
+using Vostok.Commons.ValueObjects;
 
-namespace Vostok.Commons.Tests
+namespace Vostok.Commons.Tests.ValueObjects
 {
     [TestFixture]
     public class DataRateParser_Tests

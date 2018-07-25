@@ -1,7 +1,7 @@
 ﻿using System;
 using Vostok.Commons.Parsers;
 
-namespace Vostok.Commons
+namespace Vostok.Commons.ValueObjects
 {
     [Serializable]
     public struct DataRate : IEquatable<DataRate>, IComparable<DataRate>

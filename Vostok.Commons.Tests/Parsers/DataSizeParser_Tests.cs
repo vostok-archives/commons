@@ -2,6 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 using Vostok.Commons.Parsers;
+using Vostok.Commons.ValueObjects;
 
 namespace Vostok.Commons.Tests.Parsers
 {
